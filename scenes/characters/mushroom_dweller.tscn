@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://oxm4b2qj36kj"]
+
+[ext_resource type="Script" uid="uid://b2l2usak4dmyq" path="res://scripts/characters/mushroom_dweller.gd" id="1_kmgvr"]
+[ext_resource type="SpriteFrames" uid="uid://cqdbc8b78be75" path="res://spritesheets/mushroom_dweller.tres" id="2_kmgvr"]
+
+[sub_resource type="Animation" id="Animation_fcrvl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mnjm1"]
+resource_name = "default"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcrvl"]
+_data = {
+&"RESET": SubResource("Animation_fcrvl"),
+&"default": SubResource("Animation_mnjm1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqrnq"]
+size = Vector2(16, 16)
+
+[node name="MushroomDweller" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_kmgvr")
+speed = 0.5
+metadata/_custom_type_script = "uid://b04mmpo55qt68"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+sprite_frames = ExtResource("2_kmgvr")
+animation = &"Purple"
+offset = Vector2(0, -8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fcrvl")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xqrnq")
